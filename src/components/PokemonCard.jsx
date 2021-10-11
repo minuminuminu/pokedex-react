@@ -1,4 +1,4 @@
-export const PokemonCard = ({ prefix }) => {
+export const PokemonCard = ({ prefix, name, imgSrc }) => {
   return (
     <div
       className="border d-flex justify-content-center bg-light"
@@ -6,12 +6,12 @@ export const PokemonCard = ({ prefix }) => {
     >
       <figure className="figure">
         <img
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+          src={imgSrc}
           className="figure-img img-fluid rounded "
           alt="Pikachu"
         />
         <figcaption className="figure-caption text-center">
-          {prefix} Pikachu
+          #{prefix} {name}
         </figcaption>
       </figure>
     </div>
