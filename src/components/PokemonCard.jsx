@@ -1,4 +1,4 @@
-export const PokemonCard = () => {
+export const PokemonCard = ({ prefix }) => {
   return (
     <div
       className="border d-flex justify-content-center bg-light"
@@ -10,7 +10,9 @@ export const PokemonCard = () => {
           className="figure-img img-fluid rounded "
           alt="Pikachu"
         />
-        <figcaption className="figure-caption text-center">Pikachu</figcaption>
+        <figcaption className="figure-caption text-center">
+          {prefix} Pikachu
+        </figcaption>
       </figure>
     </div>
   );
