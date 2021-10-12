@@ -2,68 +2,13 @@ import { NavBar } from "./components/NavBar";
 import { PokemonCard } from "./components/PokemonCard";
 
 function App() {
-  const pokemons = [
-    {
-      id: 1,
-      name: "Bisasam",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-    },
-    {
-      id: 2,
-      name: "Bisaknosp",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-    },
-    {
-      id: 3,
-      name: "Bisaflor",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-    },
-    {
-      id: 4,
-      name: "Glumanda",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-    },
-    {
-      id: 5,
-      name: "Glutexo",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-    },
-    {
-      id: 6,
-      name: "Glurak",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    },
-    {
-      id: 7,
-      name: "Schiggy",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-    },
-    {
-      id: 8,
-      name: "Schillok",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
-    },
-    {
-      id: 9,
-      name: "Turtok",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-    },
-    {
-      id: 25,
-      name: "Pikachu",
-      image:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-    },
-  ];
+  const pokemons = [];
+
+  const fetchData = async () => {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=10");
+    pokemons.push(res);
+  };
+  fetchData();
 
   return (
     <div className="App">
