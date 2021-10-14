@@ -27,7 +27,7 @@ function App() {
             return (
               <div
                 className="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center"
-                key={`pokemon`}
+                key={element.name}
               >
                 <PokemonCard name={element.name} />
               </div>
