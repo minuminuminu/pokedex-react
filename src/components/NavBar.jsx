@@ -1,21 +1,29 @@
+import { Link, useLocation } from "react-router-dom";
+
 export const NavBar = () => {
+  const location = useLocation();
+
   return (
     <header className="d-flex justify-content-center py-3 navbar-dark bg-dark">
       <ul className="nav nav-pills">
         <li className="nav-item me-5">
-          <a href="#" className="nav-link active" aria-current="page">
+          <Link
+            to={"/"}
+            className={`nav-link ${location.pathname == "/" ? "active" : ""}`}
+            aria-current="page"
+          >
             Home
-          </a>
+          </Link>
         </li>
         <li className="nav-item me-5">
-          <a href="#" className="nav-link">
-            All Pokemons
-          </a>
-        </li>
-        <li className="nav-item me-5">
-          <a href="#" className="nav-link">
+          <Link
+            to={"/faq"}
+            className={`nav-link ${
+              location.pathname == "/faq" ? "active" : ""
+            }`}
+          >
             FAQs
-          </a>
+          </Link>
         </li>
       </ul>
     </header>

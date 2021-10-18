@@ -7,7 +7,7 @@ export const Pokedex = () => {
   useEffect(() => {
     const fetchData = async () => {
       const pokemonsData = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=20`
+        `https://pokeapi.co/api/v2/pokemon?limit=898`
       );
       const datafromJson = await pokemonsData.json();
 
