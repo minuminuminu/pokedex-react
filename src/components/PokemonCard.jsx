@@ -1,4 +1,4 @@
-export const PokemonCard = ({ name }) => {
+export const PokemonCard = ({ name, img }) => {
   return (
     <div
       className="border d-flex justify-content-center bg-light"
@@ -6,6 +6,7 @@ export const PokemonCard = ({ name }) => {
     >
       <figure className="figure">
         <figcaption className="figure-caption text-center">{name}</figcaption>
+        <img src={img} />
       </figure>
     </div>
   );
