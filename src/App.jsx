@@ -3,51 +3,87 @@ import { PokemonCard } from "./components/PokemonCard";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [pokeNames, setPokeNames] = useState(null);
-  const [pokeImage, setPokeImage] = useState(null);
+  const [pokemons, setPokemons] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [currentPokemon, setCurrentPokemon] = useState(null);
+
+  // lifecycle
+  // 1) bevor render
+  // 2) render done ---- componentDidMount()
+  // 3) on destroy
+  // 4) destroy
 
   useEffect(() => {
     const fetchData = async () => {
-      for (let i = 1; i < 6; i++) {
-        const detailedData = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${i}/`
-        );
-        const detailedDataJson = await detailedData.json();
-        console.log(detailedDataJson.forms[0].name);
-        setPokeNames(detailedDataJson.forms[0].name);
-        setPokeImage(detailedDataJson.sprites.front_default);
+      const pokemonsData = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=10`
+      );
+      const datafromJson = await pokemonsData.json();
+
+      const fakePokemons = datafromJson.results;
+      const realPokemons = [];
+
+      for (let index = 0; index < fakePokemons.length; index++) {
+        realPokemons.push({
+          name: fakePokemons[index].name,
+          url: fakePokemons[index].url,
+          id: index + 1,
+        });
       }
 
-      console.log(pokeNames);
+      setPokemons(realPokemons);
     };
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const fetchSelected = async () => {
+      if (selectedId == null) {
+        return;
+      }
 
-  // pokeImage != null &&
-  //   pokeImage.map(async (e) => {
-  //     const tempUrl = await fetch(e);
-  //     const tempJson = await tempUrl.json();
-  //     console.log(tempJson.base_experience);
-  //   });
-  console.log(pokeNames);
+      const selectedData = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${selectedId}/`
+      );
+      const selectedJson = await selectedData.json();
+
+      setCurrentPokemon(selectedJson);
+    };
+
+    fetchSelected();
+  }, [selectedId]);
 
   return (
     <div>
-      <NavBar></NavBar>
-      <div className="row">
-        {pokeNames != null &&
-          pokeNames.map((element) => {
-            return (
-              <div
-                className="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center"
-                key={element}
-              >
-                <PokemonCard name={element} />
-              </div>
-            );
-          })}
+      <NavBar />
+      <h1>Pokemons</h1>
+      <div>
+        {pokemons.map((onePokemon) => {
+          return (
+            <img
+              key={`pokemon-${onePokemon.id}`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${onePokemon.id}.png`}
+              onClick={() => {
+                setSelectedId(onePokemon.id);
+              }}
+            />
+          );
+        })}
       </div>
+
+      {currentPokemon && (
+        <div>
+          <PokemonCard
+            name={currentPokemon.name}
+            frontSrc={currentPokemon.sprites.front_default}
+            backSrc={currentPokemon.sprites.back_default}
+            height={currentPokemon.height}
+            weight={currentPokemon.weight}
+            types={currentPokemon.types}
+            stats={currentPokemon.stats}
+          />
+        </div>
+      )}
     </div>
   );
 }
