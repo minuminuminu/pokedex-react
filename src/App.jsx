@@ -31,7 +31,7 @@ function App() {
     });
 
   return (
-    <div className="App">
+    <div>
       <NavBar></NavBar>
       <div className="row">
         {pokemons != null &&

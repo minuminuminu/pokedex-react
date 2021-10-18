@@ -5,7 +5,9 @@ export const PokemonCard = ({ name, img }) => {
       style={{ width: "150px", height: "150px" }}
     >
       <figure className="figure">
-        <figcaption className="figure-caption text-center">{name}</figcaption>
+        <figcaption className="figure-caption text-center upperFirst">
+          {name}
+        </figcaption>
         <img src={img} />
       </figure>
     </div>
