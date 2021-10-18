@@ -8,20 +8,27 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const dataMapUrl = [];
       const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=5");
       const data = await res.json();
-      const detailedData = await fetch(data.results[0].url);
-      const data2 = await detailedData.json();
+      for (let i = 0; i < data.results.length; i++) {
+        dataMapUrl.push(data.results[i].url);
+      }
 
-      setPokeImage(data2.sprites.front_default);
       setPokemons(data.results);
+      setPokeImage(dataMapUrl);
     };
 
     fetchData();
   }, []);
 
-  console.log(pokemons);
-  console.log(pokeImage);
+  // console.log(Array.isArray(pokeImage));
+  pokeImage != null &&
+    pokeImage.map(async (e) => {
+      const tempUrl = await fetch(e);
+      const tempJson = await tempUrl.json();
+      console.log(tempJson.base_experience);
+    });
 
   return (
     <div className="App">
@@ -34,7 +41,7 @@ function App() {
                 className="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center"
                 key={`pokemon-${element.name}`}
               >
-                <PokemonCard name={element.name} img={pokeImage} />
+                <PokemonCard name={element.name} />
               </div>
             );
           })}
