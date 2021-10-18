@@ -1,0 +1,3 @@
+.upperFirst:first-letter {
+  text-transform: capitalize;
+}
