@@ -12,20 +12,20 @@ export const PokemonDetailPage = () => {
   useEffect(() => {
     const fetchSelected = async () => {
       try {
-        console.log("fetch");
+        // console.log("fetch");
         const selectedData = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${id}/`
         );
 
-        console.log("before json");
+        // console.log("before json");
 
         const selectedJson = await selectedData.json();
 
-        console.log("after json");
+        // console.log("after json");
 
         setCurrentPokemon(selectedJson);
 
-        console.log("after set");
+        // console.log("after set");
       } catch (err) {
         setErrorState(true);
       }

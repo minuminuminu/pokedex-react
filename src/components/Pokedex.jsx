@@ -7,7 +7,7 @@ export const Pokedex = () => {
   useEffect(() => {
     const fetchData = async () => {
       const pokemonsData = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=898`
+        `https://pokeapi.co/api/v2/pokemon?limit=10`
       );
       const datafromJson = await pokemonsData.json();
 
@@ -37,10 +37,15 @@ export const Pokedex = () => {
             <Link
               to={`/details/${onePokemon.id}`}
               key={`pokemon-${onePokemon.id}`}
+              className="text-decoration-none"
             >
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${onePokemon.id}.png`}
-              />
+              <div className="invisHover">
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${onePokemon.id}.png`}
+                  className="hoverSize"
+                />
+                <p className="text-center text-capitalize">{onePokemon.name}</p>
+              </div>
             </Link>
           );
         })}
